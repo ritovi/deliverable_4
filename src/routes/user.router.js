@@ -1,6 +1,7 @@
-const { getAll, create, getOne, remove, update, login, specialSetPosts, me } = require('../controllers/user.controllers');
+const { getAll, create, getOne, remove, update, login, me } = require('../controllers/user.controllers');
 const express = require('express');
 const { verifyJwt } = require('../utils/verifyJWT');
+const { getAllFavou, createFavou, removeFavou } = require('../controllers/favourite.controllers');
 
 const routerUser = express.Router();
 
@@ -15,7 +16,11 @@ routerUser.route("/me")
     .get(verifyJwt, me)
 
 routerUser.route("/:user_id/posts")
-    .post(specialSetPosts)
+    .get(verifyJwt, getAllFavou)
+    .post(verifyJwt, createFavou)
+
+routerUser.route("/:user_id/posts/:id")
+    .delete(verifyJwt, removeFavou)
 
 
 routerUser.route('/:id')

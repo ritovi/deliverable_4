@@ -6,7 +6,8 @@ const Post = require("../models/Post")
 
 const getAll = catchError(async (req, res) => {
     const result = await User.findAll({ include: [Post] });
-    
+
+
     const users = result.map(user => {
         const userObj = user.toJSON();
         delete userObj.email;
@@ -92,26 +93,26 @@ const login = catchError(async(req,res)=>{
 });
 
 
-const specialSetPosts = async(req,res)=>{
-    try{
-        //const {user_id} = req.params;
-        const user_id = req.user.id;
-        user_id = req.user
-        if(!user_id) return res.status(400).json({error : "User Id is required..."});
+// const specialSetPosts = async(req,res)=>{
+//     try{
+//         //const {user_id} = req.params;
+//         const user_id = req.user.id;
+//         user_id = req.user
+//         if(!user_id) return res.status(400).json({error : "User Id is required..."});
 
-        const user = await User.findByPk(user_id);
-        if(!user) return res.status(404).json({error: "User not found"});
+//         const user = await User.findByPk(user_id);
+//         if(!user) return res.status(404).json({error: "User not found"});
 
-        await user.setPosts(req.body);
+//         await user.setPosts(req.body);
          
-        const result = await user.getActors();
+//         const result = await user.getActors();
 
-        return res.json(result);
-    }catch(error){
-        console.log("Error in specialSetPosts : ", error);
-        return res.status(500).json({error: "An unexpected error ocurred"});
-    }
-};
+//         return res.json(result);
+//     }catch(error){
+//         console.log("Error in specialSetPosts : ", error);
+//         return res.status(500).json({error: "An unexpected error ocurred"});
+//     }
+// };
 
 const me = catchError(async(req,res)=>{
     return res.json(req.user);
@@ -123,6 +124,6 @@ module.exports = {
     remove,
     update,
     login,
-    specialSetPosts,
+    // specialSetPosts,
     me
 }
