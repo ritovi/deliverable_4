@@ -3,7 +3,7 @@ const Favourite = require('../models/Favourite');
 
 const getAllFavou = catchError(async(req, res) => {
     const id = req.user.id;
-    const results = await Favourite.findAll({where : {id} });
+    const results = await Favourite.findAll({where : {userId : id} });
     return res.json(results);
 });
 

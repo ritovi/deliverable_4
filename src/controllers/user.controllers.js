@@ -82,7 +82,7 @@ const login = catchError(async(req,res)=>{
         
         const options = {
            // algorithm: 'HS256', 
-            expiresIn: '10m',    
+            expiresIn: '20m',    
            // issuer: 'issuer',  
            // audience: 'audience', 
            // subject: 'subject'  
